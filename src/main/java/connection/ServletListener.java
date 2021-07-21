@@ -1,5 +1,7 @@
 package connection;
 
+import manager.UserManager;
+
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -30,5 +32,12 @@ public class ServletListener implements ServletContextListener {
     public void contextInitialized(ServletContextEvent event)  { 
     	ServletContext sc = event.getServletContext();
     	DataBase db = new DataBase();
+        UserManager userM = null;
+        try {
+            userM = new UserManager(db);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        sc.setAttribute("userM", userM);
     }
 }
