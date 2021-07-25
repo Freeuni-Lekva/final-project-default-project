@@ -1,2 +1,11 @@
-package quiz.bean;public class QuestionTypeEnum {
-}
+package quiz.bean;
+
+public enum QuestionTypeEnum {
+    QuestionResponse,
+    FillBlank,
+    MultipleChoice,
+    MultipleChoiceAnswer,
+    MultiAnswer,
+    PictureResponse,
+    Matching
+  }
