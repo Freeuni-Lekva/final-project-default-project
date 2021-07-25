@@ -3,15 +3,18 @@ package quiz.bean;
 import java.util.Vector;
 
 public class Quiz {
+
 	public Quiz(String quizname,int quizid,int authorid,Vector<Question> questions) {
 		this.quizname = quizname;
 		this.quizid = quizid;
 		this.authorid = authorid;
 		this.questions = questions;
 	}
+
 	public Quiz(){
 		super();
 	}
+
 	protected String quizname;
 	protected String description;
 	protected int quizid;

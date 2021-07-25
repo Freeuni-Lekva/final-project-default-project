@@ -1,6 +1,7 @@
 package quiz.bean;
 
 public class Question {
+
 	public Question(String question, QuestionTypeEnum type, int questionid,
 					int quizid, String c_answer, int answer_count) {
 		this.question = question;
