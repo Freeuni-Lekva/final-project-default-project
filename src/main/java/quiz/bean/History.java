@@ -50,11 +50,11 @@ public class History {
 		this.time = time;
 	}
 
-	public String getStarttime() {
+	public String getStartTime() {
 		return starttime;
 	}
 
-	public void setStarttime(String starttime) {
+	public void setStartTime(String starttime) {
 		this.starttime = starttime;
 	}
 
