@@ -1,6 +1,5 @@
 package user.dao;
 
-import quiz.bean.QuestionTypeEnum;
 import user.bean.Messages;
 
 import java.sql.Connection;
@@ -146,9 +145,9 @@ public class MessagesDao {
 		}
 	}
 	
-	public List<Messages> getUnseen(int usrId, QuestionTypeEnum type) throws SQLException {
+	public List<Messages> getUnseen(int usrId, String type) throws SQLException {
 		try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Messages WHERE u_to = " + usrId 
-				+ " AND m_type = " + type.ordinal() + " AND seen = 0;")) {
+				+ " AND m_type = '" + type + "' AND seen = 0;")) {
 			try (ResultSet rslt = stmt.executeQuery()) {
 				List<Messages> unseen = new ArrayList<>();
 				while(rslt.next()) {
@@ -165,9 +164,9 @@ public class MessagesDao {
 		}
 	}
 	
-	public void setSeen(int usrId, QuestionTypeEnum type) throws SQLException {
+	public void setSeen(int usrId, String type) throws SQLException {
 		String sql = "UPDATE TABLE Messages SET seen = 1 WHERE"
-				+ " u_to = " + usrId + " AND m_type = " + type.ordinal() + ";";
+				+ " u_to = " + usrId + " AND m_type = '" + type + "'";
 		try (PreparedStatement stmt = conn.prepareStatement(sql)) {
 			stmt.executeUpdate();
 		} catch (SQLException e) {
