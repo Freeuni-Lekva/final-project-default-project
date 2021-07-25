@@ -66,11 +66,7 @@ public class Quiz {
 	public void setPractice(int p) {
 		this.practice = p;
 	} 
-	
-	public int getPractice() {
-		return this.practice;
-	}
-	
+
 	public void setPages(int p) {
 		this.pages = p;
 	} 
@@ -82,15 +78,7 @@ public class Quiz {
 	public void setCategory(String cat) {
 		this.category = cat;
 	}
-	
-	public String getCategory() {
-		return this.category;
-	}
-	
-	public Vector<Question> GetQuestions(){
-		return this.questions;
-	}
-	
+
 	public void setDescription(String descr) {
 		this.description = descr;
 	}

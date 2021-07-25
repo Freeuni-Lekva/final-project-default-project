@@ -1,14 +1,9 @@
 package quiz.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 
 import quiz.bean.*;
-
 
 public class QuizDao {
 	
@@ -17,7 +12,7 @@ public class QuizDao {
 	public QuizDao(Connection conn) {
 		this.conn = conn;
 	}
-	
+
 	/*
 	 * Delete quiz by id
 	 * */
@@ -50,20 +45,6 @@ public class QuizDao {
 				return null;
 			}
 		}
-	}
-	
-	
-	public int isMultiPage(int quizid) throws SQLException {
-		int isMP = 0;
-		try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Quizes WHERE quiz_id = ?")) {
-			stmt.setInt(1, quizid);
-			try (ResultSet rslt = stmt.executeQuery()) {
-				if (rslt.next()) {
-					isMP = rslt.getInt("multiPage");
-				}
-			}
-		}
-		return isMP;
 	}
 	
 	/*
@@ -114,8 +95,7 @@ public class QuizDao {
 			}
 		}
 	}
-	
-	
+
 	public ArrayList<Quiz> getUnfinishedQuizByCreator(int authorid) throws SQLException {
 		try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Quizes WHERE author_id = ? AND finished = 0;")) {
 			stmt.setInt(1, authorid);
@@ -133,8 +113,7 @@ public class QuizDao {
 			}
 		}
 	} 
-	
-	
+
 	/*
 	 * Return quiz list by category 
 	 * */
@@ -176,8 +155,6 @@ public class QuizDao {
 		}
 	}
 	
-	
-	
 	public ArrayList<Quiz> getNewQuizes() throws SQLException {
 		try (Statement stmt = conn.createStatement()) {
 			try(ResultSet rslt = stmt.executeQuery("SELECT * FROM Quizes WHERE finished = 1 ORDER BY quiz_id DESC;")) {
@@ -194,7 +171,6 @@ public class QuizDao {
 			}
 		}
 	}
-	
 
 	public void setQuizFinished(int quizId) {
 		String sql = "UPDATE Quizes SET finished=1 where quiz_id = " + quizId + ";";
@@ -204,34 +180,9 @@ public class QuizDao {
 			e.printStackTrace();
 		}
 	}
-	
-	public int createNewQuiz(String quizName, String description, int authorId, String category, int isRandom, int finished, int multiPage) {
-			
-		try {
-			Statement stmt = (Statement) conn.createStatement();
-			String sql = "INSERT INTO Quizes(quiz_name, author_id, description, category, multiPage, isRandom, correction, practice, finished, filled)"
-				+ "VALUES('" + quizName +"', "+ authorId + ", '" + description + "', '" + category +"', "+ multiPage + ", "  +isRandom + ", "
-						+ "0, 0, " + finished + ", 0)";
-			stmt.executeUpdate(sql);
-		} catch (SQLException e1) {
-			e1.printStackTrace();
-		}
-		int lastid = -1;
-		try (Statement stmt2 = conn.createStatement()) {
-			try(ResultSet rslt = stmt2.executeQuery("SELECT * FROM Quizes WHERE author_id = " + authorId +" "
-					+ "ORDER BY quiz_id DESC;")) {
-				if(rslt.next()) {
-					lastid = rslt.getInt("quiz_id");
-				}
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		return lastid;
-	}
-	
-	public int createNewQuiz(String quizName, String description, int authorId, String category, int isRandom, int finished, int multiPage, int correction) {
+
+	public int createNewQuiz(String quizName, String description, int authorId,
+							 String category, int isRandom, int finished, int multiPage, int correction) {
 		
 		try {
 			Statement stmt = (Statement) conn.createStatement();
@@ -300,51 +251,6 @@ public class QuizDao {
 		return recents;
 	}
 	
-	public ArrayList<History> getRecentNeverCreated(int userid) {
-		ArrayList<History> recents = new ArrayList<>();
-		try (PreparedStatement stmt = conn.prepareStatement("select * from quizes where quiz_id in "
-				+ "(Select quiz_id from history where user_id = 1) group by quiz_id;")) {
-			try (ResultSet rslt = stmt.executeQuery()) {
-				for(int i=0; i<5; i++) {
-					if (rslt.next()) {
-						History curr = new History();
-						curr.setUser_id(rslt.getInt("user_id"));
-						curr.setId(rslt.getInt("quiz_id"));
-						curr.setScore(rslt.getInt("score"));
-						curr.setTime(rslt.getInt("f_time"));
-						recents.add(curr);
-					}
-				}
-				return recents;
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return recents;
-	}
-	
-	
-	public ArrayList<History> getFriendsLastActivities(int userid) {
-		ArrayList<History> recents = new ArrayList<>();
-		try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM History WHERE user_id IN "
-				+ " (SELECT friend_id FROM Friends WHERE user_id =  " + userid + ") ORDER BY id DESC;")) {
-			try (ResultSet rslt = stmt.executeQuery()) {
-				while(rslt.next()) {
-					History h = new History();
-					h.setUser_id(rslt.getInt("user_id"));
-					h.setQuiz_id(rslt.getInt("quiz_id"));
-					h.setScore(rslt.getInt("score"));
-					h.setTime(rslt.getInt("f_time"));
-					recents.add(h);
-				}
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return recents;
-	}
-	
-	
 	public ArrayList<History> getTopScores(int quizid) {
 		ArrayList<History> top = new ArrayList<>();
 		try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM History WHERE quiz_id = " + quizid +
@@ -381,8 +287,6 @@ public class QuizDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
-		System.out.println("CAT SIZE    " + cat);
 		return cat;
 	}
 	
@@ -403,14 +307,12 @@ public class QuizDao {
 				}
 				return hist;
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			return hist;
 	}
 	
-	
-	public void addUserHostory(History h) {
+	public void addUserHistory(History h) {
 		Statement stmt;
 		try {
 			stmt = (Statement) conn.createStatement();
@@ -419,13 +321,11 @@ public class QuizDao {
 					+h.getStarttime() + "', '" + h.getEndtime() + "')";
 			stmt.executeUpdate(sql);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	
 	}
-	
-	
+
 	public int getBestScore(int userid, int quizid) {
 		int score = 0;
 		try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM History WHERE user_id = " 
@@ -438,7 +338,6 @@ public class QuizDao {
 					}
 				}
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		return score;
