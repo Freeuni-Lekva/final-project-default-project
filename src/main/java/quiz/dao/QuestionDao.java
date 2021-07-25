@@ -157,7 +157,6 @@ public class QuestionDao {
 		return 0;
 	}
 
-
 	private String updateFbQrQuery(Question q)
 	{
 		return "UPDATE Questions SET question='" + q.getQuestion() + "', "
