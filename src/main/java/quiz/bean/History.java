@@ -65,5 +65,4 @@ public class History {
 	public void setEndtime(String endtime) {
 		this.endtime = endtime;
 	}
-
 }
