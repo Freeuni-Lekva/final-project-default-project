@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Matching extends Question {
-	public Matching(String question, String type, int questionid, int quizid, String c_answer, int answer_count) {
+	public Matching(String question, QuestionTypeEnum type, int questionid, int quizid, String c_answer, int answer_count) {
 		super(question, type, questionid, quizid,  c_answer, answer_count );
 	}
 	
@@ -38,6 +38,4 @@ public class Matching extends Question {
 		List<String> listed = Arrays.asList(matchs);
 		return listed;
 	}
-	
-	
 }

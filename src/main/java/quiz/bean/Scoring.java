@@ -13,35 +13,35 @@ public class Scoring {
 		int score = 0;
 		for (int i =0; i< anslist.size(); i++) {
 			int ord = 0;
-			if(qlist.get(i).getType().equals("MA"))
+			if(qlist.get(i).getType() == QuestionTypeEnum.MultiAnswer)
 				ord = ((MultiAnswer)qlist.get(i)).getIsOrderd();
 			score += getScore(qlist.get(i).getCAnswer(), anslist.get(i), qlist.get(i).getType(), ord);
 		}
 		return score;
 	}
 	
-	public int getScore(String c_answ, ArrayList<String> input, String qtype, int ordered) {
+	public int getScore(String c_answ, ArrayList<String> input, QuestionTypeEnum qtype, int ordered) {
 		int score = 0;		
 		
-		if(qtype.equals("QR")) {
+		if(qtype == QuestionTypeEnum.QuestionResponse) {
 			score += qrScoring(c_answ, input);
 		}
-		else if(qtype.equals("FB")) {
+		else if(qtype == QuestionTypeEnum.FillBlank) {
 			score += fbScoring(c_answ, input);
 		}
-		else if(qtype.equals("PR")) {
+		else if(qtype == QuestionTypeEnum.PictureResponse) {
 			score += prScoring(c_answ, input);
 		}
-		else if(qtype.equals("MC")) {
+		else if(qtype == QuestionTypeEnum.MultipleChoice) {
 			score += mcScoring(c_answ, input);
 		}
-		else if(qtype.equals("MCA")) {
+		else if(qtype == QuestionTypeEnum.MultipleChoiceAnswer) {
 			score += mcaScoring(c_answ, input);
 		}
-		else if(qtype.equals("MA")) {
+		else if(qtype == QuestionTypeEnum.MultiAnswer) {
 			score += maScoring(c_answ, input, ordered);
 		}
-		else if(qtype.equals("M")) {
+		else if(qtype == QuestionTypeEnum.Matching) {
 			score += mScoring(c_answ, input);
 		}
 		

@@ -17,98 +17,32 @@ public class QuestionDao {
 		QuestionTypeEnum type = q.getType();
 
 		if (type  == QuestionTypeEnum.QuestionResponse || type  == QuestionTypeEnum.FillBlank) {
-			String sql = "INSERT INTO Questions (question, type, c_answer, answer_count, quiz_id) "
-					+ "VALUES('"
-					+ q.getQuestion()
-					+ "', '"
-					+ q.getType().ordinal()
-					+ "', '"
-					+ q.getCAnswer()
-					+ "', '"
-					+ q.getAnswerCount()
-					+ "', '"
-					+ q.getQuizId() + "')";
-			stmt.executeUpdate(sql);
+			stmt.executeUpdate(buildFbQrQuery(q));
 		}
 		else if (type == QuestionTypeEnum.MultipleChoice || type == QuestionTypeEnum.MultipleChoiceAnswer) {
-			String sql = "INSERT INTO Questions (question, type, c_answer, w_answer, answer_count, quiz_id) "
-					+ "VALUES('"
-					+ q.getQuestion()
-					+ "', '"
-					+ q.getType().ordinal()
-					+ "', '"
-					+ q.getCAnswer()
-					+ "', '"
-					+ ((MultipleChoice) q).getWAnswers()
-					+ "', '"
-					+ q.getAnswerCount() + "', '" + q.getQuizId() + "')";
-			stmt.executeUpdate(sql);
+			stmt.executeUpdate(buildMcMcaQuery(q));
 		}
 		else if (type  == QuestionTypeEnum.MultiAnswer) {
-			String sql = "INSERT INTO Questions (question, type, c_answer, ordered, answer_count, quiz_id) "
-					+ "VALUES('"
-					+ q.getQuestion()
-					+ "', '"
-					+ q.getType().ordinal()
-					+ "', '"
-					+ q.getCAnswer()
-					+ "', '"
-					+ ((MultiAnswer) q).getIsOrderd()
-					+ "', '"
-					+ q.getAnswerCount() + "', '" + q.getQuizId() + "')";
-			stmt.executeUpdate(sql);
+			stmt.executeUpdate(buildMaQuery(q));
 		}
 		else if (type  == QuestionTypeEnum.PictureResponse) {
-			String sql = "INSERT INTO Questions (question, type, c_answer, answer_count, pic_url, quiz_id) "
-					+ "VALUES('"
-					+ q.getQuestion()
-					+ "', '"
-					+ q.getType().ordinal()
-					+ "', '"
-					+ q.getCAnswer()
-					+ "', '"
-					+ q.getAnswerCount()
-					+ "', '"
-					+ ((PictureResponse) q).getPicUrl()
-					+ "', '"
-					+ q.getQuizId() + "')";
-			stmt.executeUpdate(sql);
+			stmt.executeUpdate(buildPrQuery(q));
 		}
 		else if (type == QuestionTypeEnum.Matching) {
-			String sql = "INSERT INTO Questions (question, type, c_answer, answer_count, quiz_id) "
-					+ "VALUES('"
-					+ q.getQuestion()
-					+ "', '"
-					+ q.getType().ordinal()
-					+ "', '"
-					+ q.getCAnswer()
-					+ "', '"
-					+ q.getAnswerCount()
-					+ "', '"
-					+ q.getQuizId() + "')";
-			stmt.executeUpdate(sql);
+			stmt.executeUpdate(buildMQuery(q));
 		}
 	}
 	
 	public void updateQuestion(Question q) {
 		String sql = "";
 		if (q.getType() == QuestionTypeEnum.QuestionResponse || q.getType() == QuestionTypeEnum.FillBlank) {
-			sql = "UPDATE Questions SET question='" + q.getQuestion() + "', "
-				+ "c_answer='" + q.getCAnswer() +"' WHERE id=" + q.getQuestionId() + ";";
+			sql = updateFbQrQuery(q);
 		} else if(q.getType() == QuestionTypeEnum.PictureResponse) {
-			sql = "UPDATE Questions SET question='" + q.getQuestion() + "', "
-					+ "c_answer='" + q.getCAnswer() + "', pic_url='" + ((PictureResponse) q).getPicUrl()
-					+"' WHERE id=" + q.getQuestionId() + ";";
+			sql = updatePrQuery(q);
 		} else if(q.getType() == QuestionTypeEnum.MultipleChoice || q.getType() == QuestionTypeEnum.MultipleChoiceAnswer) {
-			sql = "UPDATE Questions SET question=" + q.getQuestion() + " "
-					+ "c_answer=" + q.getCAnswer() + " w_answer= " + ((MultipleChoice) q).getWAnswers()
-					+ " answer_count=" + ((MultipleChoice) q).getAnswerCount()
-					+" WHERE id=" + q.getQuestionId() + ";";
+			sql = updateMcMcaQuery(q);
 		} else if(q.getType() == QuestionTypeEnum.MultiAnswer) {
-			sql = "UPDATE Questions SET question=" + q.getQuestion() + " "
-					+ "c_answer=" + q.getCAnswer() + " ordered=" +  ((MultiAnswer) q).getIsOrderd()
-					+ " answer_count=" + ((MultiAnswer) q).getAnswerCount()
-					+" WHERE id=" + q.getQuestionId() + ";";
+			sql = updateMaQuery(q);
 		}
 		try (PreparedStatement stmt = conn.prepareStatement(sql)) {
 			stmt.executeUpdate(sql);
@@ -160,14 +94,6 @@ public class QuestionDao {
 		}
 		return q;
 
-	}
-
-	public void deleteQuestionByQuizId(int id) throws SQLException {
-		try (PreparedStatement stmt = conn
-				.prepareStatement("DELETE FROM Questions WHERE quiz_id = ?")) {
-			stmt.setInt(1, id);
-			stmt.executeUpdate();
-		}
 	}
 	
 	public ArrayList<Question> getQuestionsByQuizId(int id) throws SQLException {
@@ -229,5 +155,112 @@ public class QuestionDao {
 			}
 		}
 		return 0;
+	}
+
+
+	private String updateFbQrQuery(Question q)
+	{
+		return "UPDATE Questions SET question='" + q.getQuestion() + "', "
+				+ "c_answer='" + q.getCAnswer() +"' WHERE id=" + q.getQuestionId() + ";";
+	}
+
+	private String updateMcMcaQuery(Question q)
+	{
+		return "UPDATE Questions SET question=" + q.getQuestion() + " "
+				+ "c_answer=" + q.getCAnswer() + " w_answer= " + ((MultipleChoice) q).getWAnswers()
+				+ " answer_count=" + ((MultipleChoice) q).getAnswerCount()
+				+" WHERE id=" + q.getQuestionId() + ";";
+	}
+
+	private String updateMaQuery(Question q)
+	{
+		return "UPDATE Questions SET question=" + q.getQuestion() + " "
+				+ "c_answer=" + q.getCAnswer() + " ordered=" +  ((MultiAnswer) q).getIsOrderd()
+				+ " answer_count=" + ((MultiAnswer) q).getAnswerCount()
+				+" WHERE id=" + q.getQuestionId() + ";";
+	}
+
+	private String updatePrQuery(Question q)
+	{
+		return "UPDATE Questions SET question='" + q.getQuestion() + "', "
+				+ "c_answer='" + q.getCAnswer() + "', pic_url='" + ((PictureResponse) q).getPicUrl()
+				+"' WHERE id=" + q.getQuestionId() + ";";
+	}
+
+	private String buildFbQrQuery(Question q)
+	{
+		return "INSERT INTO Questions (question, type, c_answer, answer_count, quiz_id) "
+				+ "VALUES('"
+				+ q.getQuestion()
+				+ "', '"
+				+ q.getType().ordinal()
+				+ "', '"
+				+ q.getCAnswer()
+				+ "', '"
+				+ q.getAnswerCount()
+				+ "', '"
+				+ q.getQuizId() + "')";
+	}
+
+	private String buildMcMcaQuery(Question q)
+	{
+		return "INSERT INTO Questions (question, type, c_answer, w_answer, answer_count, quiz_id) "
+				+ "VALUES('"
+				+ q.getQuestion()
+				+ "', '"
+				+ q.getType().ordinal()
+				+ "', '"
+				+ q.getCAnswer()
+				+ "', '"
+				+ ((MultipleChoice) q).getWAnswers()
+				+ "', '"
+				+ q.getAnswerCount() + "', '" + q.getQuizId() + "')";
+	}
+
+	private String buildMaQuery(Question q)
+	{
+		return "INSERT INTO Questions (question, type, c_answer, ordered, answer_count, quiz_id) "
+				+ "VALUES('"
+				+ q.getQuestion()
+				+ "', '"
+				+ q.getType().ordinal()
+				+ "', '"
+				+ q.getCAnswer()
+				+ "', '"
+				+ ((MultiAnswer) q).getIsOrderd()
+				+ "', '"
+				+ q.getAnswerCount() + "', '" + q.getQuizId() + "')";
+	}
+
+	private String buildPrQuery(Question q)
+	{
+		return "INSERT INTO Questions (question, type, c_answer, answer_count, pic_url, quiz_id) "
+				+ "VALUES('"
+				+ q.getQuestion()
+				+ "', '"
+				+ q.getType().ordinal()
+				+ "', '"
+				+ q.getCAnswer()
+				+ "', '"
+				+ q.getAnswerCount()
+				+ "', '"
+				+ ((PictureResponse) q).getPicUrl()
+				+ "', '"
+				+ q.getQuizId() + "')";
+	}
+
+	public String buildMQuery(Question q)
+	{
+		return "INSERT INTO Questions (question, type, c_answer, answer_count, quiz_id) "
+				+ "VALUES('"
+				+ q.getQuestion()
+				+ "', '"
+				+ q.getType().ordinal()
+				+ "', '"
+				+ q.getCAnswer()
+				+ "', '"
+				+ q.getAnswerCount()
+				+ "', '"
+				+ q.getQuizId() + "')";
 	}
 }
