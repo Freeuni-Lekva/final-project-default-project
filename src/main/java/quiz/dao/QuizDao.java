@@ -318,7 +318,7 @@ public class QuizDao {
 			stmt = (Statement) conn.createStatement();
 			String sql = "INSERT INTO History(user_id, quiz_id, score, f_time, start_time, end_time)" 
 					+ "VALUES("+ h.getUser_id() + ", " + h.getQuiz_id() +", "+ h.getScore() + ", " + h.getTime() + ", '"
-					+h.getStarttime() + "', '" + h.getEndtime() + "')";
+					+h.getStartTime() + "', '" + h.getEndtime() + "')";
 			stmt.executeUpdate(sql);
 		} catch (SQLException e) {
 			e.printStackTrace();
