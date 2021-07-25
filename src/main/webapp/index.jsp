@@ -60,7 +60,7 @@
         ArrayList<Quiz> newquiz = qDao.getNewQuizes();
         ArrayList<String> categ = qDao.getCategories();
     %>
-  
+
 </section>
 <% } %>
 <% } %>
