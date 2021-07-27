@@ -92,7 +92,6 @@
             %>><%= (i+1) +". " + allquiz.get(i).getQuizName() %></a><br>
             <% } %>
         </div>
-
     </div>
 </section>
 <% } %>
