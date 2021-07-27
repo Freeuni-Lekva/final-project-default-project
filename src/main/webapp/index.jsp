@@ -9,6 +9,31 @@
                 url,'popUpWindow','height=30px, width=50px,left=250,top=150,resizable=no,status=yes')
         }
     </script>
+
+    <style>
+        input[type=button] {
+            background:none!important;
+            border:none;
+            padding:0!important;
+            font-family:arial,sans-serif;
+            font-size: 15px;
+            color:green;
+            display:inline-block;
+            text-decoration:underline;
+            cursor:pointer;
+        }
+
+        .boxes {
+            float: left;
+            margin: 10px;
+            padding: 10px;
+            max-width: 300px;
+            height: 200px;
+            border: 1px solid black;
+            overflow: scroll;
+        }
+
+    </style>
 </head>
 <body>
 
@@ -22,10 +47,9 @@
 </nav>
 <section>
     <p>- Lorem Ipsum Something...</p>
- </section>
+</section>
 
 <% } else { %>
-<script src="myscripts.js"></script>
 
 <nav>
     <h2><a href="index.jsp">
@@ -56,11 +80,20 @@
         User me = uDao.getUserByName((String)request.getSession().getAttribute("username"));
         QuizDao qDao = uM.getQuizDao();
         ArrayList<Quiz> allquiz = qDao.getQuizList();
-        ArrayList<Quiz> topquiz = qDao.getTopQuizes();
-        ArrayList<Quiz> newquiz = qDao.getNewQuizes();
-        ArrayList<String> categ = qDao.getCategories();
     %>
+    <div id="content">
+        <div class="boxes">
+            <p> Quiz List </p>
+            <% for (int i = 0; i < allquiz.size(); i++) { %>
+            <% if (i > 10) {
+                break;
+            }%>
+            <a href=<%= "startQuiz.jsp?quizid=" +  allquiz.get(i).getQuizId()
+            %>><%= (i+1) +". " + allquiz.get(i).getQuizName() %></a><br>
+            <% } %>
+        </div>
 
+    </div>
 </section>
 <% } %>
 <% } %>
