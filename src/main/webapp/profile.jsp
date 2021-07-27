@@ -9,21 +9,6 @@
                 url,'popUpWindow','height=30px, width=50px,left=250,top=150,resizable=no,status=yes')
         }
     </script>
-
-    <style>
-        input[type=button] {
-            background:none!important;
-            border:none;
-            padding:0!important;
-            font-family:arial,sans-serif;
-            font-size: 15px;
-            color:green;
-            display:inline-block;
-            text-decoration:underline;
-            cursor:pointer;
-
-        }
-    </style>
 </head>
 <body>
 <%@ page import="user.bean.*" %>
@@ -41,6 +26,10 @@
 <jsp:forward page = "index.jsp" />
 <% } else { %>
 
+<%
+
+%>
+
 <header>
     <a href="index.jsp">Quiz Web Site</a>
 </header>
@@ -49,9 +38,61 @@
 <jsp:forward page = "index.jsp" />
 <% } %>
 
+<nav>
+    <p style="color:blue;"> <a href=<%= "profile.jsp?profile=" + request.getParameter("profile") %>>
+        <%= request.getParameter("profile") + "'s Profile" %></a></p>
+
+    <img src="<%= curr_user.getUserpic() %>" alt="<%= curr_user.getUserName()%>" style="width:90px;height:90px;"/>
+
+    <div class="form">
+        <form action="AcceptRequest" method="post">
+            <input type="hidden" name="acceptfrom" value="<%=curr_user.getUserName() %>">
+            <input type="hidden" name="returntouser" value="<%=curr_user.getUserName() %>">
+            <input type="submit" value="Accept Request" />
+        </form>
+    </div>
+
+    <a href=<%= "showHistory.jsp?profile=" +  curr_user.getUserName() %>> History </a><br>
+    <a href=<%= "showUsersQuizes.jsp?profile=" +  curr_user.getUserName() %>> Quizes </a><br>
+    <a href="society.jsp"> Society </a><br>
+</nav>
+
+<% } else { %>
+<nav>
+    <p style="color:blue;"> <a href=<%= "profile.jsp?profile=" + request.getParameter("profile") %>>
+        <%= request.getParameter("profile") + "'s Profile" %></a></p>
+
+    <img src="<%= curr_user.getUserpic() %>" alt="<%= curr_user.getUserName()%>" style="width:90px;height:90px;"/>
+
+    <% if (isRequested) { %>
+    <div class="form">
+        <form action="CancelRequest" method="post">
+            <input type="hidden" name="cancelTo" value="<%=curr_user.getUserName() %>">
+            <input type="submit" value="Cancel Request" />
+        </form>
+    </div>
+    <% } else {%>
+    <div class="form">
+        <form action="AddFriend" method="post">
+            <input type="hidden" name="messageTo" value="<%=curr_user.getUserName() %>">
+            <input type="submit" value="Add Friend" />
+        </form>
+    </div>
+    <% } %>
+</nav>
+<% } %>
+
 <section>
     <br>
     <br>
+    <div class="content">
+        <h2> Send Message</h2>
+        <form action="SendNote" method="Post">
+            <textarea placeholder="Write message..." rows=3 cols=25 name="note"></textarea><br>
+            <input type="hidden" name="user" value=<%= curr_user.getUserName() %> />
+            <button> Send note </button>
+        </form>
+    </div>
 
 </section>
 
