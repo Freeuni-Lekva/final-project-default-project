@@ -1,16 +1,13 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: LevanOzashvili
-  Date: 7/27/2021
-  Time: 09:25 PM
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<head>
-    <title>Title</title>
-</head>
+
 <body>
+
+<a href="myFriends.jsp"> Friend List </a><br>
+<a href= "myHistory.jsp?"> History </a><br>
+<a href="myQuizes.jsp"> My Quizes </a><br>
 
 </body>
 </html>
