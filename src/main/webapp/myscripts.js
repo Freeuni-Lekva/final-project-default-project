@@ -59,7 +59,7 @@ function addQuestion(btn) {
 		xhttp.open("GET", "FriendRequests", true)
 		xhttp.send()
 	}
-	
+
 	function searchFunc() {
 		var name = document.getElementById("mySearch").value;
 		var xhttp = new XMLHttpRequest();
