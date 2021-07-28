@@ -1,16 +1,62 @@
 <%--
   Created by IntelliJ IDEA.
-  User: SuperUser
+  User: gugushabeso
   Date: 7/28/2021
   Time: 11:05 PM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8"%>
+<!DOCTYPE HTML>
 <html>
-  <head>
-    <title>$Title$</title>
-  </head>
-  <body>
-  $END$
-  </body>
+<head>
+</head>
+<body>
+
+<header>
+  <a href="index.jsp">Quiz Web Site</a>
+</header>
+<%if (session.getAttribute("authorized") == null || session.getAttribute("logout") != null){ %>
+<nav>
+  <a href="login.jsp"  >Login</a> <br>
+  <a href="register.jsp" >Register</a>
+</nav>
+<section>
+  <p>- Ipsum Lorem ...</p>
+</section>
+
+<% } else { %>
+<script src="myscripts.js"></script>
+
+<nav>
+  <h2><a href="index.jsp">
+    <%= session.getAttribute("username") %>
+  </a></h2>
+  <img src="<%= session.getAttribute("image") %>" alt="<%= session.getAttribute("username") %>" style="width:90px;height:90px;"><br>
+
+  <%@ include file="panel.jsp" %>
+
+
+  <form action="Logout" method="get">
+    <button> Logout </button><br>
+  </form>
+
+</nav>
+<section>
+  <div id="content">
+    <%@ include file = "userList.jsp.jsp" %>
+  </div>
+</section>
+<% } %>
+
+<aside>
+  <input type="search" id="mySearch" placeholder="Search for friends..">
+  <input type="submit" onclick="searchFunc()"/>
+</aside>
+
+<footer>
+  <a href="index.jsp">Home page</a>
+</footer>
+
+</body>
 </html>
