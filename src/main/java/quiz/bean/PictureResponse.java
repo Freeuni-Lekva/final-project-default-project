@@ -2,9 +2,9 @@ package quiz.bean;
 
 public class PictureResponse extends Question {
 
-	public PictureResponse(String question, String type, int questionid, int quizid, String url, String c_answer, int answer_count) {
+	public PictureResponse(String question, QuestionTypeEnum type, int questionid, int quizid, String url, String c_answer, int answer_count) {
 		super(question, type, questionid, quizid,  c_answer, answer_count);
-		this.picurl = url;
+		this.picUrl = url;
 	}
 
 	public PictureResponse() {
