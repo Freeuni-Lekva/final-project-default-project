@@ -5,8 +5,7 @@ import java.util.List;
 
 public class MultipleChoice extends Question {
 
-	public MultipleChoice(String question, QuestionTypeEnum type, int questionid,
-						  int quizid, String c_answer, int answer_count,  String wronganswers, int ordered) {
+	public MultipleChoice(String question, QuestionTypeEnum type, int questionid, int quizid, String c_answer, int answer_count,  String wronganswers, int ordered) {
 		super(question, type, questionid, quizid, c_answer, answer_count);
 		this.w_answers = wronganswers;
 		this.ordered = ordered;
