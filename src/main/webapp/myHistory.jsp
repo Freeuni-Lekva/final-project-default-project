@@ -3,12 +3,28 @@
 <!DOCTYPE HTML>
 <html>
 <head>
+  <link rel="stylesheet" type="text/css" href="mystyles.css" />
   <script type="text/javascript">
     function newPopup(url) {
       popupWindow = window.open(
               url,'popUpWindow','height=30px, width=50px,left=250,top=150,resizable=no,status=yes')
     }
   </script>
+
+  <style>
+    input[type=button] {
+      background:none!important;
+      border:none;
+      padding:0!important;
+      font-family:arial,sans-serif;
+      font-size: 15px;
+      color:green;
+      display:inline-block;
+      text-decoration:underline;
+      cursor:pointer;
+
+    }
+  </style>
 </head>
 <body>
 
@@ -17,6 +33,7 @@
 <%@ page import="manager.*" %>
 <%@ page import="quiz.dao.*" %>
 <%@ page import="java.sql.SQLException" %>
+
 
 <header>
   <a href="index.jsp">Quiz Web Site</a>
@@ -27,10 +44,11 @@
   <a href="register.jsp" >Register</a>
 </nav>
 <section>
-  <p>- Lorem Ipsum </p>
+  <p>- Ipsum Lorem ..</p>
 </section>
 
 <% } else { %>
+<script src="myscripts.js"></script>
 
 <nav>
   <h2><a href="index.jsp">
