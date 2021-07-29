@@ -1,4 +1,3 @@
-
 function addQuestion(btn) {
 	var cansw = 0;
 	var wansw = 0;
