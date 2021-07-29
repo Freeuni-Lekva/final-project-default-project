@@ -1,5 +1,7 @@
 package connection;
 
+import manager.FriendManager;
+import manager.MessageManager;
 import manager.UserManager;
 
 import javax.servlet.ServletContext;
@@ -29,15 +31,22 @@ public class ServletListener implements ServletContextListener {
 	/**
      * @see ServletContextListener#contextInitialized(ServletContextEvent)
      */
-    public void contextInitialized(ServletContextEvent event)  { 
-    	ServletContext sc = event.getServletContext();
-    	DataBase db = new DataBase();
+    public void contextInitialized(ServletContextEvent event)  {
+        ServletContext sc = event.getServletContext();
+        DataBase db = new DataBase();
+
         UserManager userM = null;
+        FriendManager friM = null;
+        MessageManager mesM = null;
         try {
             userM = new UserManager(db);
+            friM = new FriendManager(db);
+            mesM = new MessageManager(db);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
         sc.setAttribute("userM", userM);
+        sc.setAttribute("friM", friM);
+        sc.setAttribute("mesM", mesM);
     }
 }
