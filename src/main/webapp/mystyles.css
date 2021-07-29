@@ -1,0 +1,50 @@
+@CHARSET "UTF-8";
+
+header {
+    background-color:black;
+    color:white;
+    text-align:center;
+    padding:5px;
+}
+
+footer {
+    background-color:black;
+    color:white;
+    clear:both;
+    text-align:center;
+    padding:5px;
+}
+
+button {
+    background:none!important;
+    border:none;
+    padding:0!important;
+    font-family:arial,sans-serif;
+    font-size: 15px;
+    color:green;
+    display:inline-block;
+    text-decoration:underline;
+    cursor:pointer;
+}
+
+input[type=button] {
+    background:none!important;
+    border:none;
+    padding:0!important;
+    font-family:arial,sans-serif;
+    font-size: 15px;
+    color:green;
+    display:inline-block;
+    text-decoration:underline;
+    cursor:pointer;
+
+}
+
+.achievement {
+    position: relative;
+    width: 400px;
+    float: left;
+    height: 100px;
+    margin-left: 20px;
+    margin-top: 15px;
+}
