@@ -173,7 +173,6 @@ public class Scoring {
 			if(right.get(i).toLowerCase().equals(input.get(i).toLowerCase()))
 				score++;
 		}
-		
 		return score;
 	}
 }
