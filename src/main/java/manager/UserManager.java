@@ -1,11 +1,12 @@
 package manager;
 
-import connection.DataBase;
+import java.sql.Connection;
+
 import quiz.dao.QuestionDao;
 import quiz.dao.QuizDao;
+import user.dao.AchievementDao;
 import user.dao.UserDao;
-
-import java.sql.Connection;
+import connection.DataBase;
 
 public class UserManager {
 	protected Connection conn;
@@ -13,10 +14,12 @@ public class UserManager {
 	protected UserDao UserD = null;
 	protected QuizDao QuizD = null;
 	protected QuestionDao QuestionD = null;
+	protected AchievementDao achievementDao = null;
 
 	public UserManager(DataBase data) throws ClassNotFoundException {
 		this.db = data;
 		this.conn = db.getConnection();
+		this.achievementDao = new AchievementDao(conn);
 	}
 
 	public UserDao getUserDao() {
@@ -38,5 +41,12 @@ public class UserManager {
 			this.QuestionD = new QuestionDao(conn);
 		}
 		return this.QuestionD;
+	}
+
+	public AchievementDao getAchievementDao() {
+		if (this.achievementDao == null) {
+			this.achievementDao = new AchievementDao(conn);
+		}
+		return achievementDao;
 	}
 }

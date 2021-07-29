@@ -55,5 +55,4 @@ public class Messages {
 	public int getQuizId() {
 		return this.quiz_id;
 	}
-	
 }
