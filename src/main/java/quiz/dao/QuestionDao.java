@@ -32,7 +32,7 @@ public class QuestionDao {
 			stmt.executeUpdate(buildMQuery(q));
 		}
 	}
-	
+
 	public void updateQuestion(Question q) {
 		String sql = "";
 		if (q.getType() == QuestionTypeEnum.QuestionResponse || q.getType() == QuestionTypeEnum.FillBlank) {
@@ -58,7 +58,7 @@ public class QuestionDao {
 			stmt.executeUpdate();
 		}
 	}
-	
+
 	public Question getQuestionById(int id) {
 		Question q = null;
 		try (Statement stmt = conn.createStatement()) {
@@ -87,7 +87,7 @@ public class QuestionDao {
 					q.setCAnswer(rslt.getString("c_answer"));
 					q.setAnswerCount(rslt.getInt("answer_count"));
 					q.setType(type);
-				}	
+				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -95,39 +95,39 @@ public class QuestionDao {
 		return q;
 
 	}
-	
+
 	public ArrayList<Question> getQuestionsByQuizId(int id) throws SQLException {
 		try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Questions WHERE quiz_id = ?")) {
 			stmt.setInt(1, id);
 			try (ResultSet rslt = stmt.executeQuery()) {
 				ArrayList<Question> question_list = new ArrayList<Question>();
-				
+
 				while (rslt.next()) {
 					Question curr_quest = null;
 					QuestionTypeEnum type = QuestionTypeEnum.values()[rslt.getInt("type")];
-					
+
 					if (type == QuestionTypeEnum.PictureResponse)
 					{
 						curr_quest = new PictureResponse();
 						((PictureResponse) curr_quest).setPicUrl(rslt.getString("pic_url"));
-					} 
+					}
 					else if (type == QuestionTypeEnum.MultiAnswer)
 					{
 						curr_quest = new MultiAnswer();
 						((MultiAnswer) curr_quest).setIsOrdered(rslt.getInt("ordered"));
-					} 
+					}
 					else if (type == QuestionTypeEnum.MultipleChoice || type== QuestionTypeEnum.MultipleChoiceAnswer)
 					{
 						curr_quest = new MultipleChoice();
 						((MultipleChoice) curr_quest).setWAnswers(rslt.getString("w_answer"));
-					} 
+					}
 					else if (type == QuestionTypeEnum.QuestionResponse)
 					{
 						curr_quest = new QuestionResponse();
 					}
 					else if (type == QuestionTypeEnum.FillBlank) {
 						curr_quest = new FillInTheBlank();
-					}					
+					}
 					else if (type == QuestionTypeEnum.Matching) {
 						curr_quest = new Matching();
 					}
@@ -137,7 +137,7 @@ public class QuestionDao {
 					curr_quest.setAnswerCount(rslt.getInt("answer_count"));
 					curr_quest.setQuizId(rslt.getInt("quiz_id"));
 					curr_quest.setType(QuestionTypeEnum.values()[rslt.getInt("type")]);
-					
+
 					question_list.add(curr_quest);
 
 				}
@@ -261,5 +261,13 @@ public class QuestionDao {
 				+ q.getAnswerCount()
 				+ "', '"
 				+ q.getQuizId() + "')";
+	}
+
+	public void deleteQuestionByQuizId(int id) throws SQLException {
+		try (PreparedStatement stmt = conn
+				.prepareStatement("DELETE FROM Questions WHERE quiz_id = ?")) {
+			stmt.setInt(1, id);
+			stmt.executeUpdate();
+		}
 	}
 }
