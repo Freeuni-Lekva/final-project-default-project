@@ -22,9 +22,7 @@
             display:inline-block;
             text-decoration:underline;
             cursor:pointer;
-
         }
-
     </style>
 </head>
 <body>
@@ -37,7 +35,6 @@
 <%@ page import="quiz.dao.*" %>
 <%@ page import="quiz.bean.*" %>
 
-
 <header>
     <a href="index.jsp">Quiz Web Site</a>
 </header>
@@ -47,9 +44,8 @@
     <a href="register.jsp" >Register</a>
 </nav>
 <section>
-    <p>- Ipsum Lorem ..</p>
+    <p>- Lorem Ipsum ...</p>
 </section>
-
 <% } else { %>
 <script src="myscripts.js"></script>
 

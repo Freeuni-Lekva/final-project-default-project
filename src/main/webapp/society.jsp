@@ -3,6 +3,27 @@
 <!DOCTYPE HTML>
 <html>
 <head>
+  <link rel="stylesheet" type="text/css" href="mystyles.css" />
+  <script type="text/javascript">
+    function newPopup(url) {
+      popupWindow = window.open(
+              url,'popUpWindow','height=30px, width=50px,left=250,top=150,resizable=no,status=yes')
+    }
+  </script>
+
+  <style>
+    input[type=button] {
+      background:none!important;
+      border:none;
+      padding:0!important;
+      font-family:arial,sans-serif;
+      font-size: 15px;
+      color:green;
+      display:inline-block;
+      text-decoration:underline;
+      cursor:pointer;
+    }
+  </style>
 </head>
 <body>
 
@@ -14,8 +35,9 @@
   <a href="login.jsp"  >Login</a> <br>
   <a href="register.jsp" >Register</a>
 </nav>
+
 <section>
-  <p>- Ipsum Lorem ...</p>
+  <p>- Lorem Ipsum ...</p>
 </section>
 
 <% } else { %>
@@ -29,7 +51,6 @@
 
   <%@ include file="panel.jsp" %>
 
-
   <form action="Logout" method="get">
     <button> Logout </button><br>
   </form>
@@ -37,7 +58,7 @@
 </nav>
 <section>
   <div id="content">
-    <%@ include file = "userList.jsp.jsp" %>
+    <%@ include file = "userList.jsp" %>
   </div>
 </section>
 <% } %>
