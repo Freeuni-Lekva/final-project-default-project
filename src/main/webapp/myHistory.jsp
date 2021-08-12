@@ -34,7 +34,6 @@
 <%@ page import="quiz.dao.*" %>
 <%@ page import="java.sql.SQLException" %>
 
-
 <header>
   <a href="index.jsp">Quiz Web Site</a>
 </header>
@@ -44,7 +43,7 @@
   <a href="register.jsp" >Register</a>
 </nav>
 <section>
-  <p>- Ipsum Lorem ..</p>
+  <p>- Lorem Ipsum ...</p>
 </section>
 
 <% } else { %>

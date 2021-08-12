@@ -4,10 +4,10 @@
 <html>
 
 <body>
-
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="manager.*" %>
 <%@ page import="quiz.dao.*" %>
+
 
 <%
     UserManager um = (UserManager) getServletConfig().getServletContext().getAttribute("userM");

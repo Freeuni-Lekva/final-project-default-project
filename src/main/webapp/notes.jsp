@@ -19,10 +19,9 @@
             font-family:arial,sans-serif;
             font-size: 15px;
             color:green;
-            display:inline-block
+            display:inline-block;
             text-decoration:underline;
             cursor:pointer;
-
         }
     </style>
 </head>
@@ -36,6 +35,7 @@
     <a href="login.jsp"  >Login</a> <br>
     <a href="register.jsp" >Register</a>
 </nav>
+
 <section>
     <p>- Lorem Ipsum ...</p>
 </section>
@@ -57,41 +57,11 @@
         </form>
     </div>
 </nav>
-
 <section>
     <div id="content">
-        <br>
-        <br>
-        <%if (session.getAttribute("quizfinish") != null) { %>
-        <p> Your quiz is added. </p>
-        <%} else if (session.getAttribute("quizprocess") != null){ %>
-
-
-        <form action="ShowQuiz" method="get">
-            <button>Continue Started Quiz</button>
-        </form>
-        <br>
-        <br>
-        <p> OR </p>
-        <br>
-        <br>
-        <%} %>
-        <h3> Create your own quiz :)</h3> <br>
-        <form action="StartCreating" method="post">
-            <i>Quiz Name:</i> <input type="text" name="quizName"><br>
-            <i>Description: </i><br>
-            <textarea rows=3 cols=15 name="description"></textarea><br>
-
-            <i>Category:</i>
-            <%@ include file="quizCategories.jsp" %><br>
-            <i>Random Order:</i> <input type="checkbox" name="isRandom" value="random"><br>
-            <i>Multiple Page:</i> <input type="checkbox" name="multiPage" value="multi"> <br>
-            <i>Correction:</i> <input type="checkbox" name="correction" value="correction">
-            <br><br>
-            <button>Start new Quiz</button>
-
-        </form>
+        <script>noteFunc();</script>
     </div>
+
 </section>
 <% } %>
 
