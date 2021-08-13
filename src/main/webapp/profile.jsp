@@ -3,12 +3,28 @@
 <!DOCTYPE HTML>
 <html>
 <head>
+    <link rel="stylesheet" type="text/css" href="mystyles.css" />
     <script type="text/javascript">
         function newPopup(url) {
             popupWindow = window.open(
                 url,'popUpWindow','height=30px, width=50px,left=250,top=150,resizable=no,status=yes')
         }
     </script>
+
+    <style>
+        input[type=button] {
+            background:none!important;
+            border:none;
+            padding:0!important;
+            font-family:arial,sans-serif;
+            font-size: 15px;
+            color:green;
+            display:inline-block;
+            text-decoration:underline;
+            cursor:pointer;
+
+        }
+    </style>
 </head>
 <body>
 <%@ page import="user.bean.*" %>
@@ -18,6 +34,7 @@
 <%
     Integer logged_user_id = (Integer) session.getAttribute("id");
     UserDao uDao = ((UserManager) getServletConfig().getServletContext().getAttribute("userM")).getUserDao();
+    FriendsDao fDao = ((FriendManager)getServletConfig().getServletContext().getAttribute("friM")).getFriendDao();
     User curr_user = uDao.getUserByName(request.getParameter("profile"));
 %>
 
@@ -27,7 +44,9 @@
 <% } else { %>
 
 <%
-
+    boolean areFriends = fDao.isFriend(logged_user_id, curr_user.getUserId());
+    boolean isRequested = fDao.isRequested(logged_user_id, curr_user.getUserId());
+    boolean reverseRequested = fDao.isRequested(curr_user.getUserId(), logged_user_id);
 %>
 
 <header>
@@ -38,6 +57,26 @@
 <jsp:forward page = "index.jsp" />
 <% } %>
 
+<% /* áƒ›áƒ”áƒ’áƒáƒ‘áƒ áƒáƒ‘áƒ */ %>
+<% if (areFriends) { %>
+<nav>
+    <p style="color:blue;"> <a href=<%= "profile.jsp?profile=" + request.getParameter("profile") %>>
+        <%= request.getParameter("profile") + "'s Profile" %></a></p>
+
+    <img src="<%= curr_user.getUserpic() %>" alt="<%= curr_user.getUserName()%>" style="width:90px;height:90px;"/>
+    <div class="form">
+        <form action="Unfriend" method="post">
+            <input type="hidden" name="unfriendTo" value="<%=curr_user.getUserName() %>">
+            <input type="submit" value="Unfriend" />
+        </form>
+    </div>
+
+    <a href=<%= "showFriends.jsp?profile=" +  curr_user.getUserName() %>> Friends </a><br>
+    <a href=<%= "showHistory.jsp?profile=" +  curr_user.getUserName() %>> History </a><br>
+    <a href=<%= "showUsersQuizes.jsp?profile=" +  curr_user.getUserName() %>> Quizes </a><br>
+    <a href="society.jsp"> Society </a><br>
+</nav>
+<% } else if (reverseRequested){%>
 <nav>
     <p style="color:blue;"> <a href=<%= "profile.jsp?profile=" + request.getParameter("profile") %>>
         <%= request.getParameter("profile") + "'s Profile" %></a></p>
@@ -52,6 +91,7 @@
         </form>
     </div>
 
+    <a href=<%= "showFriends.jsp?profile=" +  curr_user.getUserName() %>> Friends </a><br>
     <a href=<%= "showHistory.jsp?profile=" +  curr_user.getUserName() %>> History </a><br>
     <a href=<%= "showUsersQuizes.jsp?profile=" +  curr_user.getUserName() %>> Quizes </a><br>
     <a href="society.jsp"> Society </a><br>
@@ -79,6 +119,12 @@
         </form>
     </div>
     <% } %>
+
+
+    <a href=<%= "showFriends.jsp?profile=" +  curr_user.getUserName() %>> Friends </a><br>
+    <a href=<%= "showHistory.jsp?profile=" +  curr_user.getUserName() %>> History </a><br>
+    <a href=<%= "showUsersQuizes.jsp?profile=" +  curr_user.getUserName() %>> Quizes </a><br>
+    <a href="society.jsp"> Society </a><br>
 </nav>
 <% } %>
 

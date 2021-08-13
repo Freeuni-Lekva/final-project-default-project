@@ -3,6 +3,8 @@
 <!DOCTYPE HTML>
 <html>
 <head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="mystyles.css" />
   <script type="text/javascript">
     function newPopup(url) {
       popupWindow = window.open(
@@ -21,7 +23,6 @@
       display:inline-block;
       text-decoration:underline;
       cursor:pointer;
-
     }
   </style>
 </head>
@@ -32,6 +33,7 @@
 <%@ page import="manager.*" %>
 <%@ page import="quiz.dao.*" %>
 <%@ page import="user.dao.*" %>
+
 <header>
   <a href="index.jsp">Quiz Web Site</a>
 </header>
@@ -40,16 +42,21 @@
   <a href="login.jsp"  >Login</a> <br>
   <a href="register.jsp" >Register</a>
 </nav>
+
 <section>
-  <p>- Lorem Ipsum Something 2...
+  <p>- Lorem Ipsum ...</p>
 </section>
 
 <% } else { %>
+<script src="myscripts.js"></script>
+
 <nav>
   <h2><a href="index.jsp">
     <%= session.getAttribute("username") %>
   </a></h2>
   <img src="<%= session.getAttribute("image") %>" alt="<%= session.getAttribute("username") %>" style="width:90px;height:90px;"><br>
+
+  <%@ include file="panel.jsp" %>
 
   <form action="Logout" method="get">
     <button> Logout </button><br>
@@ -128,8 +135,6 @@
       <i> Time: <%=top.get(i).getTime() %> </i><br>
       <% } %>
     </div>
-
-
   </div>
 </section>
 <% } %>

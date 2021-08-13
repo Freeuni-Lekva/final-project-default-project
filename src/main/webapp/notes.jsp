@@ -44,9 +44,6 @@
 <script src="myscripts.js"></script>
 
 <nav>
-    <%
-        int quizid = Integer.parseInt((String)request.getParameter("quizid"));
-    %>
     <h2><a href="index.jsp">
         <%= session.getAttribute("username") %>
     </a></h2>
@@ -60,28 +57,11 @@
         </form>
     </div>
 </nav>
-
 <section>
     <div id="content">
-
-    </div>
-    <div id="questions">
-
+        <script>noteFunc();</script>
     </div>
 
-    <script>
-        displayQuestions(<%=quizid%>)
-    </script>
-
-    <br> <br>
-
-    <a href=<%="startQuestionTypes.jsp?quizid=" + quizid  %>>Add Question</a> <br> <br>
-    <form action=<%= "SaveUnfinishedQuiz?quizid=" + quizid %>  method="post">
-        <button> Save and Continue later </button><br>
-    </form><br>
-    <form action=<%="FinishQuizCreating?quizid=" + quizid %> method="post">
-        <button> Finish Quiz </button><br>
-    </form><br>
 </section>
 <% } %>
 

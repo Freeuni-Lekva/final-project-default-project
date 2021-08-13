@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html >
 <head>
+    <title> Admin Login </title>
     <link rel="stylesheet" type="text/css" href="mystyles.css" />
     <script type="text/javascript">
         function newPopup(url) {
@@ -14,7 +15,7 @@
 
 <body>
 <header>
-    <h1>Login</h1>
+    <h1>Admin Login</h1>
 </header>
 
 <section>
@@ -26,17 +27,16 @@
     <% } %>
     <% if(session.getAttribute("wronguser") != null) { %>
     <p style="color:red" > <i>
-        <font size="2">User name or Password is incorrect. Please try again. </font>
+        <font size="2">Incorrect credentials or your access level is not enough </font>
     </i> </p>
     <% session.removeAttribute("wronguser"); %>
     <% } %>
 
     <div class="form">
-        <form action="Login" method="get">
+        <form action="AdminLogin" method="get">
             <input type="text" placeholder="Username" name="user" />
             <input type="password" placeholder="Password" name="pass" />
             <button> Sign in </button>
-            <p> <a href="register.jsp"> Don't have an account? Register </a> </p>
         </form>
     </div>
 </section>

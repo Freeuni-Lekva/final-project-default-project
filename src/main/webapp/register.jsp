@@ -1,15 +1,15 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: nikushaozashvili
-  Date: 7/29/2021
-  Time: 12:11 AM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="stylesheet" type="text/css" href="mystyles.css" />
+    <script type="text/javascript">
+        function newPopup(url) {
+            popupWindow = window.open(
+                url,'popUpWindow','height=30px, width=50px,left=250,top=150,resizable=no,status=yes')
+        }
+    </script>
 </head>
 
 <header>Sign up</header>
@@ -25,7 +25,7 @@
     <% if(session.getAttribute("userexists") != null) { %>
     <p style="color:red" >
         <i>
-            <font size="2"> User already exists </font>
+            <font size="2"> Such user already exists. Please, choose another. </font>
         </i>
     </p>
     <% session.removeAttribute("userexists"); %>
