@@ -74,14 +74,14 @@ function addQuestion(btn) {
 	var wansw = 0;
 	var ordered = "0";
 	var quizid = btn.id
-	if(btn.name === "MC") {
+	if(btn.name === "2") {
 		while(true) {
 			wansw = window.prompt("Wrong answer count");
 			if(isNaN(wansw) === false && wansw > 0)
 				break;
 			alert("Please enter a valid number");
 		}
-	} else if(btn.name === "MCA") {
+	} else if(btn.name === "3") {
 		while(true) {
 			cansw = window.prompt("Correct answer count");
 			if(isNaN(cansw) === false && cansw > 0)
@@ -94,7 +94,7 @@ function addQuestion(btn) {
 				break;
 			alert("Please enter a valid number");
 		}
-	} else if(btn.name === "MA") {
+	} else if(btn.name === "4") {
 		while(true) {
 			cansw = window.prompt("Correct answer count");
 			if(isNaN(cansw) === false && cansw > 0)
@@ -107,7 +107,7 @@ function addQuestion(btn) {
 				break;
 			alert("Please enter a valid number");
 		}
-	} else if(btn.name === "M") {
+	} else if(btn.name === "6") {
 		while(true) {
 			cansw = window.prompt("Couples count");
 			if(isNaN(cansw) === false){
@@ -232,7 +232,7 @@ function challengeUser(obj) {
 	var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
 		if (xhttp.readyState == 4 && xhttp.status == 200) {
-			window.location = "http://localhost:8080/Quiz/myHistory.jsp?challenged="+xhttp.responseText;
+			window.location = "http://localhost:8080/final_project_war_exploded/myHistory.jsp?challenged="+xhttp.responseText;
 		}
 	};
 

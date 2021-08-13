@@ -10,6 +10,7 @@
                 url,'popUpWindow','height=30px, width=50px,left=250,top=150,resizable=no,status=yes')
         }
     </script>
+
     <style>
         input[type=button] {
             background:none!important;
@@ -21,6 +22,7 @@
             display:inline-block;
             text-decoration:underline;
             cursor:pointer;
+
         }
     </style>
 </head>
@@ -41,10 +43,9 @@
     <a href="login.jsp"  >Login</a> <br>
     <a href="register.jsp" >Register</a>
 </nav>
-
 <section>
-    <p>- Lorem Ipsum ...</p>
-</section>
+    <p>- Oposum Lorem... </p>
+   </section>
 
 <% } else { %>
 <script src="myscripts.js"></script>
@@ -56,18 +57,20 @@
     String username = (String) request.getParameter("profile");
     User usr = null;
     Integer logged_user_id = (Integer) session.getAttribute("id");
-    FriendsDao fDao = ((FriendManager)getServletConfig().getServletContext().getAttribute("friM")).getFriendDao();
+    FriendsDao fDao = ((FriendManager) getServletConfig().getServletContext().getAttribute("friM")).getFriendDao();
     ArrayList<quiz.bean.History> hist = null;
 
     try {
         usr = udao.getUserByName(username);
         hist = qdao.getUserHistory(usr.getUserId());
     } catch (SQLException e) {
+        // TODO Auto-generated catch block
         e.printStackTrace();
     }
     boolean areFriends = fDao.isFriend(logged_user_id, usr.getUserId());
     boolean isRequested = fDao.isRequested(logged_user_id, usr.getUserId());
     boolean reverseRequested = fDao.isRequested(usr.getUserId(), logged_user_id);
+
 %>
 
 <% if (areFriends) { %>

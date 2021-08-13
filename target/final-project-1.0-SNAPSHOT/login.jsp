@@ -36,6 +36,7 @@
             <input type="text" placeholder="Username" name="user" />
             <input type="password" placeholder="Password" name="pass" />
             <button> Sign in </button>
+            <p> <a href="register.jsp"> Don't have an account? Register </a> </p>
         </form>
     </div>
 </section>

@@ -68,7 +68,7 @@ public class QuestionForm extends HttpServlet {
 			question = MultipleChoice(wAnswCount, type);
 		} 
 		else if(type == QuestionTypeEnum.PictureResponse) {
-			question += PictureResponse("PR");
+			question += PictureResponse(type);
 		} 
 		else if(type == QuestionTypeEnum.MultiAnswer){
 			Integer cAnswCount = ansc;
@@ -110,7 +110,7 @@ public class QuestionForm extends HttpServlet {
 		return html;
 	}
 	
-	private String PictureResponse(String tp)
+	private String PictureResponse(QuestionTypeEnum type)
 	{
 		String html = 
 				"<div class=\"form\">" +
@@ -123,7 +123,7 @@ public class QuestionForm extends HttpServlet {
 						+ "<input type=\"text\" placeholder=\"Write answer\" name=\"cansw\" /><br>"+
 						"<input type=\"hidden\" name=\"correctC\" value=\"1\" />"+
 						"<input type=\"hidden\" name=\"wrongC\" value=\"0\" />"+
-						"<input type=\"hidden\" name=\"type\" value=\"" + tp + "\" />"+
+						"<input type=\"hidden\" name=\"type\" value=\"" +  type.ordinal()  + "\" />"+
 						"<button> Submit <button>" +
 					"</form> " +
 			    "<div> <br>";
@@ -178,7 +178,7 @@ public class QuestionForm extends HttpServlet {
 				"<form action=\"AddQuestion?quizid=" + this.quizid + "\" method=\"post\">"+ "<i>Question</i>" +
 				"<input type=\"text\" placeholder=\"Write question..\" name=\"quest\" /><br>" +
 				MultipleCouple(couples) +
-				"<input type=\"hidden\" name=\"type\" value=\"M\" />"+
+				"<input type=\"hidden\" name=\"type\" value=\"" + type.ordinal() + "\" />"+
 				"<button> Submit <button></form> " +
 			    "<div> <br>";
 		return html;

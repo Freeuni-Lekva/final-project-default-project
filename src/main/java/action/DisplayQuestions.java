@@ -139,7 +139,7 @@ public class DisplayQuestions extends HttpServlet {
 				"<div class=\"form\">"  +
 				"<form action=\"EditQuestion?quizid=" + this.quizid + "\" method=\"post\">"+ "<i>Question:  </i>" +
 				"<input type=\"text\" value=\"" + curr.getQuestion() + "\" name=\"quest\" /><br>"+
-				"<input type=\"hidden\" name=\"type\" value=\"MA\" />"+
+				"<input type=\"hidden\" name=\"type\" value=\"4\" />"+
 				"<input type=\"hidden\" name=\"ordered\" value=\"" + curr.getIsOrderd() + "\" />"+
 				GenerateMultipleCorrect(curr.getAnswerCount(), curr.getAnswerList()) + 
 				"<button> Edit <button>" +
@@ -156,7 +156,7 @@ public class DisplayQuestions extends HttpServlet {
 				"<input type=\"text\" value=\"" + curr.getQuestion() + "\" name=\"quest\" /><br>" +
 				"<i>Correct answer:</i><input type=\"text\" "
 				+ "value=\"" + curr.getCAnswer() + "\" name=\"cansw\" /><br>"+
-				"<input type=\"hidden\" name=\"type\" value=\"MC\" />"+
+				"<input type=\"hidden\" name=\"type\" value=\"2\" />"+
 				GenerateMultipleWrong(curr.countWrongAnswers(), curr.getWrongAnsweList()) + 
 				"<button> Edit <button>" +
 				"</form> " +
@@ -171,7 +171,7 @@ public class DisplayQuestions extends HttpServlet {
 				"<div class=\"form\">"  +
 				"<form action=\"EditQuestion?quizid=" + this.quizid + "\" method=\"post\">"+ "<i>Question</i>" +
 				"<input type=\"text\" value=\"" + curr.getQuestion() + "\" name=\"quest\" /><br>" +
-				"<input type=\"hidden\" name=\"type\" value=\"MCA\" />"+
+				"<input type=\"hidden\" name=\"type\" value=\"3\" />"+
 				GenerateMultipleCorrectWrong(curr.countCorrectAnswers(), curr.countWrongAnswers(), 
 						curr.getCorrectAnsweList(), curr.getWrongAnsweList()) + 
 				"<button> Edit <button>"+
@@ -188,7 +188,7 @@ public class DisplayQuestions extends HttpServlet {
 				"<div class=\"form\">"  +
 				"<form action=\"EditQuestion?quizid=" + this.quizid + "\" method=\"post\">"+ "<i>Question:  </i>" +
 				"<input type=\"text\" value=\"" + curr.getQuestion() + "\" name=\"quest\" /><br>"+
-				"<input type=\"hidden\" name=\"type\" value=\"M\" />"+
+				"<input type=\"hidden\" name=\"type\" value=\"6\" />"+
 				MultipleCouple(curr.getAnswerCount(), curr.getCouples()) + 
 				"<button> Edit <button>" +
 				"</form> " +

@@ -127,7 +127,6 @@ public class UserDao {
 	
 	public void updatePriority(int user, int priority) throws SQLException {
 		try (PreparedStatement stmt = conn.prepareStatement("UPDATE administrators SET priority = ? WHERE user_id = ?")) {
-			System.out.println(user + " " + priority);
 			stmt.setInt(1, priority);
 			stmt.setInt(2, user);
 			stmt.executeUpdate();

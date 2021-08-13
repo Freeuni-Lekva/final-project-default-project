@@ -72,7 +72,7 @@ public class StartQuiz extends HttpServlet {
         }
 
         html += "<br> <input type=\"hidden\" name=\"quizid\" id=\"quizid\" value=" + qid + "> "
-                + "  <button> Submit </button></form>";
+                + " <input type=\"submit\" value=\"Submit\" name=\"button\" /></form>";
 
         request.getSession().setAttribute("qstlist", qstlist);
 
@@ -92,7 +92,7 @@ public class StartQuiz extends HttpServlet {
         if(type == QuestionTypeEnum.QuestionResponse) {
             html += qrForm((QuestionResponse)q, pos);
         } else if (type == QuestionTypeEnum.FillBlank) {
-
+            html += fbForm((FillInTheBlank) q, pos);
         } else if (type == QuestionTypeEnum.PictureResponse) {
             html += prForm((PictureResponse)q, pos);
         } else if (type == QuestionTypeEnum.MultipleChoice) {
@@ -100,9 +100,32 @@ public class StartQuiz extends HttpServlet {
         } else if (type == QuestionTypeEnum.MultipleChoiceAnswer) {
             html += mcaForm((MultipleChoice)q, pos);
         } else if (type == QuestionTypeEnum.MultiAnswer) {
-
+            html += maForm((MultiAnswer) q, pos);
         } else if (type == QuestionTypeEnum.Matching) {
             html += mForm((Matching)q, pos);
+        }
+        return html;
+    }
+
+    private String fbForm(FillInTheBlank q, int pos) {
+        java.util.List<String> answers = q.getCorrectAnswerList();
+        String html = "<br> <i>" + (pos+1) + ". " + q.getQuestion() + "</i> <br>";
+        String name = pos + "x";
+        for(int i=0; i<answers.size(); i++) {
+            html +="<textarea rows=\"1\" cols=\"15\" name=" + name + i + "></textarea><br>"
+                    + "";
+        }
+        return html;
+    }
+
+    private String maForm(MultiAnswer q, int pos) {
+        java.util.List<String> answers = q.getAnswerList();
+        String html = "<br> <i>" + (pos+1) + ". " + q.getQuestion() + "</i> <br>";
+        String name = pos + "x";
+
+        for(int i=0; i<answers.size(); i++) {
+            html +="<textarea rows=\"1\" cols=\"15\" name=" + name + i + "></textarea>"
+                    + "";
         }
         return html;
     }

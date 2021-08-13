@@ -94,9 +94,9 @@
 
     <br>
     <% if (isMultiPage == 0) { %>
-    <input type="button" id= <%=qid %> value="Start Quiz" name=<%=qid %> onClick="showQuiz(this)"><br>
+    <input type="button" id= <%=qid %> value="StartQuiz" name=<%=qid %> onClick="showQuiz(this)"><br>
     <% } else { %>
-    <input type="button" id= <%=qid %> value="Start Quiz" name=<%=qid %> onClick="multiPageQuiz(this)"><br>
+    <input type="button" id= <%=qid %> value="StartQuiz" name=<%=qid %> onClick="multiPageQuiz(this)"><br>
     <% } %>
     <br><br><hr>
 

@@ -3,12 +3,27 @@
 <!DOCTYPE HTML>
 <html>
 <head>
+  <link rel="stylesheet" type="text/css" href="mystyles.css" />
   <script type="text/javascript">
     function newPopup(url) {
       popupWindow = window.open(
               url,'popUpWindow','height=30px, width=50px,left=250,top=150,resizable=no,status=yes')
     }
   </script>
+
+  <style>
+    input[type=button] {
+      background:none!important;
+      border:none;
+      padding:0!important;
+      font-family:arial,sans-serif;
+      font-size: 15px;
+      color:green;
+      display:inline-block;
+      text-decoration:underline;
+      cursor:pointer;
+    }
+  </style>
 </head>
 <body>
 
@@ -27,10 +42,11 @@
   <a href="register.jsp" >Register</a>
 </nav>
 <section>
-  <p>- Lorem Ipsum </p>
-</section>
+  <p>- Lorem Oposum..</p>
+ </section>
 
 <% } else { %>
+<script src="myscripts.js"></script>
 
 <nav>
   <h2><a href="index.jsp">
@@ -67,7 +83,8 @@
 <section>
   <div id="content">
     <br>
-    <% if(request.getParameter("challenged") != null) { %>
+    <%
+      if(request.getParameter("challenged") != null) { %>
     <p style="color:red" > <i>
       <font size="2"> <%= request.getParameter("challenged") %> </font>
     </i> </p>

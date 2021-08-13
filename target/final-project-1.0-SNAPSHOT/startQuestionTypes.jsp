@@ -1,15 +1,29 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: SuperUser
-  Date: 7/27/2021
-  Time: 11:49 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <!DOCTYPE HTML>
 <html>
 <head>
+  <link rel="stylesheet" type="text/css" href="mystyles.css" />
+  <script type="text/javascript">
+    function newPopup(url) {
+      popupWindow = window.open(
+              url,'popUpWindow','height=30px, width=50px,left=250,top=150,resizable=no,status=yes')
+    }
+  </script>
+
+  <style>
+    input[type=button] {
+      background:none!important;
+      border:none;
+      padding:0!important;
+      font-family:arial,sans-serif;
+      font-size: 15px;
+      color:green;
+      display:inline-block;
+      text-decoration:underline;
+      cursor:pointer;
+    }
+  </style>
 </head>
 <body>
 
@@ -21,15 +35,15 @@
   <a href="login.jsp"  >Login</a> <br>
   <a href="register.jsp" >Register</a>
 </nav>
+
 <section>
   <p>- Lorem Ipsum ...</p>
 </section>
 
 <% } else { %>
-<script src=""></script>
+<script src="myscripts.js"></script>
 
 <nav>
-
   <h2><a href="index.jsp">
     <%= session.getAttribute("username") %>
   </a></h2>
@@ -43,25 +57,21 @@
     </form>
   </div>
 </nav>
-
 <section>
 
   <div id="content">
-
-    <input type="submit" id=<%=request.getParameter("quizid") %> value="Question-Response" name="QR" onClick="addQuestion(this)">
-    <input type="submit" id=<%=request.getParameter("quizid") %> value="Fill-in-the-Blank" name="FB" onClick="addQuestion(this)">
-    <input type="submit" id=<%=request.getParameter("quizid") %> value="Multiple-Choice" name="MC" onClick="addQuestion(this)">
-    <input type="submit" id=<%=request.getParameter("quizid") %> value="Matching" name="M" onClick="addQuestion(this)"><br>
-    <input type="submit" id=<%=request.getParameter("quizid") %> value="Picture-Response" name="PR" onClick="addQuestion(this)">
-    <input type="submit" id=<%=request.getParameter("quizid") %> value="Multi-Answer" name="MA" onClick="addQuestion(this)">
-    <input type="submit" id=<%=request.getParameter("quizid") %> value="Multiple-Choice-Answers" name="MCA" onClick="addQuestion(this)"><br>
-    <br> <br> <br>    <br> <br> <br>
+    <input type="submit" id=<%=request.getParameter("quizid") %> value="Question-Response" name="0" onClick="addQuestion(this)">
+    <input type="submit" id=<%=request.getParameter("quizid") %> value="Fill-in-the-Blank" name="1" onClick="addQuestion(this)">
+    <input type="submit" id=<%=request.getParameter("quizid") %> value="Multiple-Choice" name="2" onClick="addQuestion(this)">
+    <input type="submit" id=<%=request.getParameter("quizid") %> value="Matching" name="6" onClick="addQuestion(this)"><br>
+    <input type="submit" id=<%=request.getParameter("quizid") %> value="Picture-Response" name="5" onClick="addQuestion(this)">
+    <input type="submit" id=<%=request.getParameter("quizid") %> value="Multi-Answer" name="4" onClick="addQuestion(this)">
+    <input type="submit" id=<%=request.getParameter("quizid") %> value="Multiple-Choice-Answers" name="3" onClick="addQuestion(this)"><br>
+    <br> <br> <br>
 
     <a href=<%="ShowQuiz?quizid=" + request.getParameter("quizid") %>>Preview</a><br>
 
   </div><br>
-
-
   <form action=<%= "SaveUnfinishedQuiz?quizid="+request.getParameter("quizid")%> method="post">
     <button> Save and Continue later </button>
   </form><br>
@@ -69,11 +79,8 @@
   <form action=<%= "FinishQuizCreating?quizid="+request.getParameter("quizid")%> method="post">
     <button> Finish Quiz </button>
   </form><br>
-
-
 </section>
 <% } %>
-
 
 <aside>
   <input type="search" id="mySearch" placeholder="Search for friends..">
