@@ -16,7 +16,7 @@ public class DataBase {
 			Class.forName("com.mysql.jdbc.Driver");
 			this.conn = (Connection) DriverManager.getConnection(
 					"jdbc:mysql://127.0.0.1:3306/webdata", "root",
-					"1234");
+					"Volkswagen123");
 		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
