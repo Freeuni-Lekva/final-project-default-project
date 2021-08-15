@@ -1,0 +1,16 @@
+<div class="quiz" id="[[:quiz_id:]]">
+  <div class="quiz_data">
+    <div class="item"> Author Name: [[:author_name:]]</div>
+    <div class="item"> Quiz Name: [[:quiz_name:]]</div>
+    <div class="item"> Description: [[:quiz_description:]]</div>
+  </div>
+  <div class="quiz_checkbox">
+    <div class="item">Random: <input type="checkbox" onclick="return false;" [[:is_random:]]/> </div>
+    <div class="item">Multipage: <input type="checkbox" onclick="return false;" value="1" [[:is_multipage:]]/></div>
+    <div class="item">Correction: <input type="checkbox" onclick="return false;" value="1" [[:is_correction:]]/></div>
+  </div>
+  <div class="quiz_buttons">
+    <button class="quiz_button" data-action="delete"> Delete </button>
+    <button class="quiz_button" data-action="clear"> Clear history </button>
+  </div>
+</div>

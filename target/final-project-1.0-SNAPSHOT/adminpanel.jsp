@@ -30,9 +30,21 @@
     <!-- Navigation -->
     <div id="navigation">
       <ul>
-        <li data-target="AdminUser"><a href="#"><span>Users</span></a></li>
-        <li data-target="AdminQuiz"><a href="#"><span>Quizzes</span></a></li>
-        <li id="adminStatistic" data-target="AdminStatistic"><a href="#" class="active"><span>Statistics</span></a></li>
+        <li>
+          <form action="AdminUser" method="get">
+            <button>Users</button>
+          </form>
+        </li>
+        <li>
+          <form action="AdminQuiz" method="get">
+            <button>Quizzes</button>
+          </form>
+        </li>
+        <li>
+          <form action="AdminStatistic" method="get">
+            <button>Statistics</button>
+          </form>
+        </li>
       </ul>
     </div>
     <!-- End Navigation -->

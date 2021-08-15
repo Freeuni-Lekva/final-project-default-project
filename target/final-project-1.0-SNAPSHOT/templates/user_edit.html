@@ -1,0 +1,26 @@
+
+<div class="user_edit">
+
+  <form id="user_edit_form" action="AdminUser" method="post">
+    <input type="hidden" id="user_id" name="user_id" value="[[:user_id:]]" />
+    <span class="input_item">
+			<span class="input_text"> User Name: </span>
+			<input type="text" id="user_name" name="user_name" value="[[:user_name:]]" />
+		</span>
+    <span class="input_item">
+			<span class="input_text"> User Email: </span>
+			<input type="email" id="user_email" name="user_email" value="[[:user_email:]]" />
+		</span>
+    <span class="input_item">
+			<span class="input_text"> User Priority: </span>
+			<input type="text" id="priority" name="user_priority" value="[[:user_priority:]]" />
+		</span>
+    <span class="input_item">
+			<input class="submit_button" type="submit" name="action" value="Save Changes" />
+		</span>
+    <span class="input_item">
+			<input class="submit_button" type="submit" name="action" value="Remove Account" />
+		</span>
+  </form>
+
+</div>
