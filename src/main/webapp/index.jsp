@@ -91,7 +91,7 @@
         ArrayList<String> categ = qDao.getCategories();
     %>
     <div id="content">
-        <h3 style="color: red;">áƒáƒ“áƒ›áƒ˜áƒœáƒ˜áƒ¡áƒ¢áƒ áƒáƒªáƒ˜áƒ˜áƒ¡ áƒ¬áƒ”áƒ áƒ˜áƒšáƒ˜: áƒ¥áƒ•áƒ˜áƒ–áƒ˜ 1 - áƒ•áƒ˜áƒœ áƒªáƒ®áƒáƒ•áƒ áƒ”áƒ‘áƒ¡ áƒ§áƒ•áƒ”áƒšáƒáƒ–áƒ” áƒ›áƒáƒ¦áƒáƒš áƒ¡áƒáƒ áƒ—áƒ£áƒšáƒ–áƒ”?</h3>
+        <h3> Welcome to Quiz website ! </h3>
 
         <div class="boxes">
             <p> Quiz List </p>
